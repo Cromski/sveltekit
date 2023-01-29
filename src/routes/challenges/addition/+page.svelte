@@ -8,7 +8,7 @@
 
     function generateRandomNumbers():void {
         let min:number = 1;
-        let max:number = 100;
+        let max:number = 20;
         nums = [Math.floor(Math.random() * (max - min + 1)) + min, Math.floor(Math.random() * (max - min + 1)) + min];
     }
 
@@ -23,6 +23,12 @@
         calculations = calculations; //apparently .push() doesnt "update" calculations
     }
 
+    function keyPressEnter(e:any):void {
+        switch(e.key){
+            case "Enter":
+                updateNumbers()
+        }
+    }
 
     generateRandomNumbers()
 
@@ -35,7 +41,7 @@
     
     <h1 class="text-center mt-6 text-xl">{nums[0]} + {nums[1]}</h1>
 
-    <input bind:value={userAnswerField} type="number" class=" w-40 h-10 text-center inline-block text-2xl border-2 border-black rounded-md mt-7 ml-[50%] translate-x-[-50%]" >
+    <input bind:value={userAnswerField} on:keyup={keyPressEnter} type="number" class=" w-40 h-10 text-center inline-block text-2xl border-2 border-black rounded-md mt-7 ml-[50%] translate-x-[-50%]" >
 
     {#if (nums[0] + nums[1]) !== userAnswerField}
         <img class=" -translate-x-[70px] w-11 inline-block" src="/redcross.jpg" alt="">
